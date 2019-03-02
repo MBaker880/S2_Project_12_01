@@ -16,15 +16,26 @@
 var orderTotal = 0;
 
 // A variable for the items contained within the shopping cart
-var cartHTML = "<table>" + "<tr>" + "<th>Item</th>" + "<th>Description</th>" + "<th>Price</th>" + "<th>Qty</th>" + "<th>Total</th>" + "</tr>";
+var cartHTML = "<table><tr><th>Item</th><th>Description</th><th>Price</th><th>Qty</th><th>Total</th></tr>";
 
 // For loop continuing the item array until certain conditions are met
-for (var i = 0; i <= item; i++) {
-    // Local variable cartHTML adding an image string as its variable
-    var cartHTML = "<tr>" + "<td>" + "<img src='tc_item.png' alt='" + item[i] + "'/>" + "</td>" + "<td>" + itemDescription[i] + "</td>" + "<td>$" + itemPrice[i] + "</td>" + "<td>" + itemQty[i] + "</td>" + "<td>$" + itemCost[i] + "</td>" + "</tr>";
+for (var i = 0; i <= 3; i++) {
+   // Local variable cartHTML adding an image string as its variable
+   cartHTML += "<tr>" + "<td>" + "<img src='tc_" + item[i] + ".png' alt='" + item[i] + "'/>" + "</td>";
+   cartHTML += "<td>" + itemDescription[i] + "</td>" + "<td>$" + itemPrice[i] + "</td>" + "<td>" + itemQty[i] + "</td>";
+   
+   // Multiplying the price variable by the quantity variable to find the current price of a specific item
+   var itemCost = itemPrice[i] * itemQty[i];
 
-    // Multiplying the price variable by the quantity variable to find the current price of a specific item
-    var itemCost = (itemPrice * itemQty);
+   // Displays the cost for the ordered items
+   cartHTML += "<td>$" + itemCost + "</td>" + "</tr>";
 
-
+   // Items cost and orders total added together to get the the cost of the costomer order
+   orderTotal = orderTotal + itemCost;
 }
+
+// Completes the shopping cart total and desplays fully calculated order value
+cartHTML += "<tr>" + "<td colspan='4'>Subtotal</td>" + "<td>$" + orderTotal + "</td>" + "</tr>" + "</table>";
+
+// Applying the cartHTML variable to the inner html of the div with the id of cart
+document.getElementById("cart").innerHTML = cartHTML;
